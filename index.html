@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <script src ="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"> </script>
+    <title>Premium AI Medical Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Segoe UI;
+    background:linear-gradient(-45deg,#4c029c,#6a11cb,#2575fc,#00c6ff,#00d4ff);
+    background-size:300% 300%;
+    animation:bg 10s infinite;
+    color:#fff
+}
+@keyframes bg{50%{background-position:100% 50%}}
+.wrap{
+    max-width:1200px;
+    margin:30px auto;
+    padding:100px;
+}
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+.card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px
+}
+label{
+    display:block;
+    margin:8px 0;
+    font-weight:700}
+    input{width:100%;padding:12px;
+    border-radius:10px;
+    border:none;
+    font-size:20px;
+}
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 35px;
+    border-radius:10px;
+    background:white;
+    color:#2575fc;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+    border: 0cap;
+    width: 100%;
+}
+
+.btn:hover{
+    background:#2575fc;
+    color:white;
+    transform:translateY(-4px);
+}
+
+.result{
+    display:none;
+    margin-top:20px;
+    padding:16px;
+    border-radius:12px;
+    background:rgba(255,255,255,.15)}
+.bar{
+    height:12px;
+    background:#ddd;
+    border-radius:8px;
+    overflow:hidden;
+}
+.fill{height:100%;
+    width:0;
+    background:#00d084;
+    transition:1s;
+}
+.dark{
+    filter:invert(.92) hue-rotate(180deg)
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+            <div class="card">
+                <center> 
+                    <div class="top" style="padding-left: 200px;">
+                        <h1>🩺 AI Heart Disease Prediction</h1>
+                    </div><br>
+                <progress></progress> 
+                </center><br><hr>
+    
+                <form id="f" action="/process" method="post">
+                    <div class="grid">
+                        <div>
+                            <label>Age</label>
+                            <input class="form-control"
+                             type='number' 
+                             step='any' 
+                             name='Age' 
+                             required>
+                        </div>
+                        <div>
+                            <label>Sex</label>
+                            <input class="form-control"  
+                            type='number' 
+                            step='any' 
+                            name='Sex' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Chestpaintype</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='Chestpaintype' 
+                            required>
+                        </div>
+                        <div>
+                            <label>BP</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='BP' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Cholesterol</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='Cholesterol' 
+                            required>
+                        </div>
+                        <div>
+                            <label>FBover120</label>
+                            <input 
+                            type='number'
+                            class="form-control" 
+                            step='any' 
+                            name='FBover120' 
+                            required>
+                        </div>
+                        <div>
+                            <label>EKG results</label>
+                            <input 
+                            type='number'
+                            class="form-control" 
+                            step='any' 
+                            name='EKGresults' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Max HR</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='MaxHR' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Exercise angina </label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='Exerciseangina' 
+                            required>
+                        </div>
+                        <div>
+                            <label>ST depression</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='STdepression' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Slopeof ST</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='SlopeofST' 
+                            required>
+                        </div>
+                        <div>
+                            <label>Number of vessels fluro</label>
+                            <input type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='Numberofvesselsfluro' 
+                            required>
+                        </div>
+                                           
+                        </div>
+                        <center>
+                        <div >
+                            <label>Thallium</label>
+                            <input style="max-width: 470px;" type='number' 
+                            class="form-control" 
+                            step='any' 
+                            name='Thallium' 
+                            required>
+                        </div>  
+                        </center>    
+                        <br><hr>
+                       <center><button type="submit" class="btn">Predict</button></center><br>
+                    </form>
+                        <div class='result' id='r'>
+                            <h3>Prediction Preview</h3>
+                            <p id='t'>Processing...</p>
+                        </div>
+            </div>
+    </div>
+</body>
+</html>
